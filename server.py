@@ -2,7 +2,6 @@ import socket
 
 TCP_IP = '0.0.0.0'
 TCP_PORT = 5005
-BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 
 P1 = 'X'
 P2 = 'O'
@@ -10,9 +9,11 @@ EMPTY = '-'
 allowed = [P1, P2, EMPTY]
 INITIAL_BOARD = EMPTY * 9
 
+BUFFER_SIZE = len(INITIAL_BOARD) + 1
+
 
 def check_valid(prev_state, cur_state, symbol) -> bool:
-    if len(cur_state) != 9:
+    if len(cur_state) < 9:
         print("Length: {:d}".format(len(cur_state)))
         return False
     matching = 0
